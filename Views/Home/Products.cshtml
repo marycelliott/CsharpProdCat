@@ -1,0 +1,32 @@
+﻿@model ViewModel
+<div class="container">
+    <header>
+        <h1 class="display-4">Products | <a asp-action="Categories">Categories</a></h1>
+    </header>
+    <div class="row">
+        <div class="col-6 p-3 border-r-2">
+            <h2>New Product</h2>
+            <form asp-action="Product" asp-controller="Home" method="post">
+                <label asp-for="OneProd.Name">Name</label>
+                <span class="text-danger small" asp-validation-for="OneProd.Name"></span>
+                <input class="form-control" asp-for="OneProd.Name">
+                <label asp-for="OneProd.Description">Description</label>
+                <span class="text-danger small" asp-validation-for="OneProd.Description"></span>
+                <input class="form-control" asp-for="OneProd.Description">
+                <label asp-for="OneProd.Price">Price</label>
+                <span class="text-danger small" asp-validation-for="OneProd.Price"></span>
+                <input class="form-control" asp-for="OneProd.Price">
+                <button class="btn btn-primary" type="submit">Create</button>
+            </form>
+        </div>
+        <div class="col-6 p-3">
+            <h2>Existing Products</h2>
+            @{
+                foreach(var prod in Model.AllProds)
+                {
+                    <p>@prod.Name</p>
+                }
+            }
+        </div>
+    </div>
+</div>

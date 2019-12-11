@@ -1,0 +1,26 @@
+@model ViewModel
+<div class="container">
+    <header>
+        <h1 class="display-4"><a asp-action="Products">Products</a> | Categories</h1>
+    </header>
+    <div class="row">
+        <div class="col-6 p-3 border-r-2">
+            <h2>New Category</h2>
+            <form asp-action="AddCat" asp-controller="Home" method="post">
+                <label asp-for="OneCat.Name">Name</label>
+                <span class="text-danger small" asp-validation-for="OneCat.Name"></span>
+                <input class="form-control" asp-for="OneCat.Name">
+                <button class="btn btn-primary" type="submit">Create</button>
+            </form>
+        </div>
+        <div class="col-6 p-3">
+            <h2>Existing Categories</h2>
+            @{
+                foreach(var cat in Model.AllCats)
+                {
+                    <p><a asp-action="Category" asp-route-id=@cat.CatId>@cat.Name</a></p>
+                }
+            }
+        </div>
+    </div>
+</div>

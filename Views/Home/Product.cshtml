@@ -1,0 +1,35 @@
+@model ViewModel
+<div class="container">
+    <header>
+        <h1 class="display-4">@Model.OneProd.Name</h1>
+    </header>
+    <div class="row">
+        <div class="col-6 p-3 border-r-2">
+            <h2>Categories Found:</h2>
+            @{
+                foreach(var assoc in Model.Associations)
+                {
+                    <p>@assoc.Category.Name</p>
+                }
+            }
+        </div>
+        <div class="col-6 p-3">
+            <h2>Add Category:</h2>
+            <form asp-action="Associate" asp-controller="Home" method="post">
+                <input asp-for="Association.ProdId" value=@Model.OneProd.ProdId type="hidden">
+                <select asp-for="Association.CatId">
+                    @{
+                        foreach(var cat in Model.AllCats)
+                        {
+                            if(cat.Associations.All(p => p.ProdId != Model.OneProd.ProdId))
+                            {
+                                <option value=@cat.CatId>@cat.Name</option>
+                            }
+                        }
+                    }
+                </select>
+                <button class="btn btn-primary" type="submit">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
